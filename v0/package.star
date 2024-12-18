@@ -63,7 +63,29 @@ def _default_build(ctx=_build_ctx()):
     """
     pass
 
-def _default_policy():
+def _policy_ctx():
+    """
+    An example policy context object.
+
+    Returns:
+        A policy context object with default values.
+    """
+    return struct(
+        build = struct(
+            id="",
+            alias="",
+            sequence=0,
+            created=0,
+            attributes={},
+            annotations={},
+        ),
+        environment = struct(
+            name="",
+            attributes={},
+        ),
+    )
+
+def _default_policy(ctx=_policy_ctx()):
     pass
 
 def _default_deploy():
