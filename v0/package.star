@@ -8,10 +8,10 @@
 #   def build(ctx):
 #     pass
 #
-#   def deploy(build, environment, inputs={}):
+#   def deploy(ctx):
 #     pass
 #
-#   def policy(build, environment):
+#   def policy(ctx):
 #     pass
 #
 #   package(
@@ -88,10 +88,40 @@ def _policy_ctx():
 def _default_policy(ctx=_policy_ctx()):
     pass
 
-def _default_deploy():
+def _deploy_ctx():
+    """
+    An example deploy context object.
+    This may be used for the deploy and destroy functions.
+
+    Returns:
+        A deploy context object with default values.
+    """
+    return struct(
+        deploy = struct(
+            id="",
+            inputs={},
+            inputs_secret={},
+            outputs={},
+            outputs_secret={},
+        ),
+        build = struct(
+            id="",
+            alias="",
+            sequence=0,
+            created=0,
+            attributes={},
+            annotations={},
+        ),
+        environment = struct(
+            name="",
+            attributes={},
+        ),
+    )
+
+def _default_deploy(ctx=_deploy_ctx()):
     pass
 
-def _default_destroy():
+def _default_destroy(ctx=_deploy_ctx()):
     pass
 
 def package(name, build=_default_build, policy=_default_policy, deploy=_default_deploy, destroy=_default_destroy, tasks={}):
