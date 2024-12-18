@@ -5,7 +5,7 @@
 # Example usage:
 #   load("github.com/ocuroot/sdk/v0/package.star", "package")
 #
-#   def build():
+#   def build(ctx):
 #     pass
 #
 #   def deploy(build, environment, inputs={}):
@@ -21,13 +21,64 @@
 #     deploy=deploy,
 #   )
 
-def package(name, build={}, policy={}, deploy={}, destroy={}, tasks={}):
+def _build_ctx():
+    """
+    An example build context object.
+
+    Returns:
+        A build context object with default values.
+    """
+
+    def set_alias(alias):
+        """
+        Sets the alias of the build.
+
+        Args:
+            alias: The alias to set.
+        """
+        pass
+
+    return struct(
+        build = struct(
+            id="",
+            sequence=0,
+            created=0,
+            attributes={},
+            set_alias=set_alias
+        ),
+        commit = struct(
+            message="",
+            ref="",
+            hash="",
+            clean=False,
+        ),
+    )
+
+def _default_build(ctx=_build_ctx()):
+    """
+    An example build function.
+
+    Args:
+        ctx: The build context.
+    """
+    pass
+
+def _default_policy():
+    pass
+
+def _default_deploy():
+    pass
+
+def _default_destroy():
+    pass
+
+def package(name, build=_default_build, policy=_default_policy, deploy=_default_deploy, destroy=_default_destroy, tasks={}):
     """
     Define a package to manage builds and deployments for the code within this directory.
 
     Args:
         name: The name of the package. Must be unique within this repository.
-        build: A function defining the build process for the package. Takes no arguments and returns a result object.
+        build: A function defining the build process for the package. Accepts a build context.
         policy: A function defining the rules for deploying this package. Accepts a build and environment. Returns a result object as in the policy module.
         deploy: A function defining the deploy process for the package. Accepts a build, environment and inputs. Returns a result object.
         destroy: A function defining the destroy process for the package. Accepts a build, environment and inputs. No return value.
