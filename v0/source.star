@@ -5,7 +5,7 @@
 # Example usage:
 #   load("github.com/ocuroot/sdk/v0/source.star", "source")
 #   
-#   def build(build):
+#   def build(ctx):
 #     source.write("build.txt", "Hello, world!")
 
 def make_source():

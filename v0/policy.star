@@ -3,13 +3,13 @@
 # Allowed in: policy
 #
 # Example usage:
-#   load("github.com/ocuroot/sdk/v0/policy.star", "policy")
+#   load("github.com/ocuroot/sdk/v0/policy.star", "later", "ready", "static", "dependency")
 #
-#   def policy(build, environment):
-#     if environment.attributes.get("type") == "prod" and build.annotations.get("staged") != "true":
-#       return policy.later("Waiting for staging")
+#   def policy(ctx):
+#     if ctx.environment.attributes.get("type") == "prod" and ctx.build.annotations.get("staged") != "true":
+#       return later("Waiting for staging")
 #     
-#     return policy.ready(
+#     return ready(
 #       inputs={
 #         "foo": static("bar"),
 #         "baz": dependency(package="pkg1", output="baz"),
