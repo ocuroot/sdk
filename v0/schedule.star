@@ -20,17 +20,16 @@
 #     }
 #   )
 
-def make_schedule():
-    def after(schedule, task):
-        """
-        Schedules a task to run after the given duration.
+def _after(schedule, task):
+    """
+    Schedules a task to run after the given duration.
 
-        Args:
-            schedule: The duration after which the task should run. Example: "1h" for 1 hour, "2m" for 2 minutes.
-            task: The name of the task to run. Must be a task defined in the current package.
-        """
-        pass
+    Args:
+        schedule: The duration after which the task should run. Example: "1h" for 1 hour, "2m" for 2 minutes.
+        task: The name of the task to run. Must be a task defined in the current package.
+    """
+    pass
 
-    return struct(
-        after = after,
-    )
+schedule = struct(
+    after = _after,
+)
