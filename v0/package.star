@@ -40,6 +40,16 @@ def _set_alias(alias):
         """
         pass
 
+def _clean(clean):
+        """
+        Indicates whether this commit has uncommitted changes.
+        Equivalent to .patch_hash == "".
+
+        Args:
+            clean: False iff this commit has uncommitted changes.
+        """
+        pass
+
 _build_ctx = struct(
         build = struct(
             id="",
@@ -52,7 +62,9 @@ _build_ctx = struct(
             message="",
             ref="",
             hash="",
-            clean=False,
+            patch_hash="",
+            patch_description="",
+            clean=_clean,
         ),
     )
 
