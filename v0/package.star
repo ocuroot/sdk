@@ -14,21 +14,11 @@
 #   def policy(ctx):
 #     pass
 #
-#   def task1(ctx):
-#     pass
-#
-#   def task2(ctx):
-#     pass
-#
 #   package(
 #     name="my_package",
 #     build=build,
 #     policy=policy,
 #     deploy=deploy,
-#     tasks={
-#       "task1": task1,
-#       "task2": task2,
-#     }
 #   )
 
 def _set_alias(alias):
@@ -144,7 +134,7 @@ def _default_destroy(destroy_ctx=_deploy_ctx):
     """
     pass
 
-def package(name, build=_default_build, policy=_default_policy, deploy=_default_deploy, destroy=_default_destroy, tasks={}):
+def package(name, build=_default_build, policy=_default_policy, deploy=_default_deploy, destroy=_default_destroy):
     """
     Define a package to manage builds and deployments for the code within this directory.
 
@@ -154,6 +144,5 @@ def package(name, build=_default_build, policy=_default_policy, deploy=_default_
         policy: A function defining the rules for deploying this package. Accepts a context object. Returns a result object as in the policy module.
         deploy: A function defining the deploy process for the package. Accepts a context object.
         destroy: A function defining the destroy process for the package. Accepts a context object.
-        tasks: A map of task names to functions. Each task function accepts a context object.
     """
     pass

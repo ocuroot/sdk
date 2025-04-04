@@ -130,7 +130,7 @@ def _default_destroy(destroy_ctx=_deploy_ctx):
     """
     pass
 
-def package(name, build=_default_build, policy=_default_policy, deploy=_default_deploy, destroy=_default_destroy, tasks={}):
+def package(name, build=_default_build, policy=_default_policy, deploy=_default_deploy, destroy=_default_destroy):
     """
     Define a package to manage builds and deployments for the code within this directory.    
     """
@@ -138,10 +138,10 @@ def package(name, build=_default_build, policy=_default_policy, deploy=_default_
 
 def ready(inputs={}):
     """
-    Indicates that the build is ready to deploy in this environment.
+    Returns a value indicating that the current build is ready to be deployed in the current environment.
 
     Args:
-        inputs (dict): Key-value pairs to be passed into the deploy function.
+        inputs: Inputs to the deploy function. A dictionary mapping string names to input values from the static or dependency functions.
     """
     pass
 
@@ -154,5 +154,34 @@ def later():
 def skip():
     """
     Indicates that this build should never be deployed in this environment.
+    """
+    pass
+
+
+def static(value):
+    """
+    Specifies a static input value to be passed into the ready function.
+
+    Args:
+        value: The value to pass into the ready function.
+    """
+    pass
+
+def dependency(
+    package,
+    output,
+    repo_id=None,
+    environment=None,
+    secret_name=None,
+):
+    """
+    Specifies a dependency input value to be passed into the ready function.
+
+    Args:
+        package: The package name of the dependency to be used. May not be the current package.
+        repo_id: The ID of the repository containing the dependency. Defaults to the current repository.
+        environment: The environment in which the dependency was built.
+        secret_name: The name of a secret to be used as the input value. One of `output` or `secret_name` must be specified.
+        output: The name of a deployment output to be used as the input value. One of `output` or `secret_name` must be specified.
     """
     pass
